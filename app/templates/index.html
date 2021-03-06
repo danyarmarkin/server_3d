@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+   <head>
+        <meta charset="utf-8">
+      <title>RPi 3D Control</title>
+      <link rel="stylesheet" href='../static/master.css'/>
+   </head>
+
+   <body onload="setHrefs()">
+        <div>
+            Сейчас работает программа <p>{{ nowProgram }}</p>
+            <br>
+            Состояние <p>{{ workStatus }}</p>
+            <progress max="100" value="{{ progress }}"></progress>
+            <div>
+                <a><button class="button" id="stop_button"> Стоп </button></a>
+                <a><button class="button" id="start_button"> Старт </button></a>
+                <a><button class="button" id="pause_button"> Пауза </button></a>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div disabled="true">
+            <h3>Ручное управление столом</h3>
+            Шагов в 360 градусах: {{ steps }} <br><br>
+            Шаг(шаги) = <input value="36" id="steps_input" onchange="setHrefs()"> <br><br>
+            Поворот<br>
+            <div>
+                <a href="" id="turn_left_button"><button class="button"> ← Влево </button></a>
+                <a href="" id="turn_right_button"><button class="button"> Вправо → </button></a>
+            </div>
+
+        </div>
+
+   <script src="table_rotate.js"></script>
+   </body>
+</html>
