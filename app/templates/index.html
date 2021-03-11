@@ -26,12 +26,14 @@
             Поворот<br>
             <div>
                 <a href="" id="turn_left_button"><button class="button"> ← Влево </button></a>
-                <a href="" id="turn_right_button"><button class="button"> Вправо → </button></a>
+                <a href="" id="turn_right_button" onclick="updateProgress('turn_right')"><button class="button"> Вправо → </button></a>
             </div>
 
         </div>
 
    <script>
+       let updateTimer;
+       var ip = {{ ip }};
        function getSteps() {
             var steps = document.getElementById('steps_input').value;
             return steps;
@@ -42,8 +44,15 @@
             return '/'+ a +'/'+ s;
         }
         function setHrefs(){
-            document.getElementById('turn_left_button').href = getHref("turn_left");
-            document.getElementById('turn_right_button').href = getHref("turn_right");
+          //  document.getElementById('turn_left_button').href = getHref("turn_left");
+          //  document.getElementById('turn_right_button').href = getHref("turn_right");
+        }
+        function updateProgress(s) {
+            updateTimer = setInterval(update(s), 500);
+        }
+        function update(s) {
+            console.log(document.URL + getHref(s));
+            window.location.href = document.URL + getHref(s);
         }
    </script>
    </body>

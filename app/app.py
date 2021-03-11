@@ -21,11 +21,12 @@ red = LedIndicator(18)
 @app.route("/")
 def index():
 	templateData = {
-      'progress'  : 25,
-      'nowProgram'  : "none",
-      'workStatus'  : work_status,
-      'steps'  : steps,
-      }
+		'ip': "192.168.31.25",
+		'progress': 25,
+		'nowProgram': "none",
+		'workStatus': work_status,
+		'steps': steps,
+    }
 	return render_template('index.html', **templateData)
 	
 # The function below is executed when someone requests a URL with the actuator name and action in it:
@@ -43,7 +44,7 @@ def action(deviceName, action):
 	for i in range(1, int(action)+1):
 		work_status = "in_work"
 		templateData = {
-			'progress': round(i/int(action)),
+			'progress': round(i/int(action)*100),
 			'nowProgram': s,
 			'workStatus': work_status,
 			'steps': steps,
@@ -51,16 +52,16 @@ def action(deviceName, action):
 		print(s, i)
 		red.blink(0.5, 0.3, 1)
 		return render_template('index.html', **templateData)
-		time.sleep(1)
+		time.sleep(0.5)
 
 	work_status = "not in work"
 	templateData = {
-	  'progress'  : 100,
-      'nowProgram'  : "none",
-      'workStatus'  : work_status,
-      'steps'  : steps,
+		'progress': 100,
+		'nowProgram': "none",
+		'workStatus': work_status,
+		'steps': steps,
 	}
 	return render_template('index.html', **templateData)
 
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port=80, debug=True)
+	app.run(host='0.0.0.0', port=80, debug=True)
