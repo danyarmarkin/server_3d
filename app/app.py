@@ -50,7 +50,7 @@ def action(deviceName, action):
 		}
 		print(s, i)
 		red.blink(0.5, 0.3, 1)
-		return render_template('index.html', **templateData)
+		render_template('index.html', **templateData)
 		time.sleep(0.5)
 
 	work_status = "not in work"
