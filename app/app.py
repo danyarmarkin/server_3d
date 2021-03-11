@@ -18,7 +18,6 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 red = LedIndicator(18)
-	
 @app.route("/")
 def index():
 	templateData = {
@@ -51,7 +50,7 @@ def action(deviceName, action):
 		}
 		print(s, i)
 		red.blink(0.5, 0.3, 1)
-		render_template('index.html', **templateData)
+		return render_template('index.html', **templateData)
 		time.sleep(1)
 
 	work_status = "not in work"
