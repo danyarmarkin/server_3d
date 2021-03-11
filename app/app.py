@@ -7,6 +7,7 @@ try:
 except Exception:
 	pass
 from indicator import *
+import time
 
 steps = 64000
 work_status = "not in work"
@@ -51,6 +52,7 @@ def action(deviceName, action):
 		print(s, i)
 		red.blink(0.5, 0.3, 1)
 		render_template('index.html', **templateData)
+		time.sleep(1)
 
 	work_status = "not in work"
 	templateData = {
