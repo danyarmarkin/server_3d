@@ -4,5 +4,11 @@ body {
 }
 
 .button {
-  border: 2px solid springgreen;
+  border: 2px solid green;
+	background: white;
+	margin: 12px;
+	padding: 12px;
+}
+.border-div {
+	border: 2px solid darkblue;
 }

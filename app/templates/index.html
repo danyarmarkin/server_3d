@@ -6,7 +6,7 @@
    </head>
 
    <body onload="setHrefs()">
-        <div>
+        <div class="border-div">
             Сейчас работает программа <p>{{ nowProgram }}</p>
             <br>
             Состояние <p>{{ workStatus }}</p>
@@ -19,7 +19,7 @@
         </div>
         <br>
         <hr>
-        <div disabled="true">
+        <div class="border-div">
             <h3>Ручное управление столом</h3>
             Шагов в 360 градусах: {{ steps }} <br><br>
             Шаг(шаги) = <input value="36" id="steps_input" onchange="setHrefs()"> <br><br>

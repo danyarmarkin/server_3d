@@ -8,26 +8,13 @@ except Exception:
 	pass
 from indicator import *
 
-app = Flask(__name__)
+steps = 64000
+work_status = "not in work"
+progress = 0
 
+app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-
-#define sensors GPIOs
-button = 20
-senPIR = 16
-
-#define actuators GPIOs
-ledRed = 13
-ledYlw = 19
-ledGrn = 26
-
-#initialize GPIO status variables
-buttonSts = 0
-senPIRSts = 0
-ledRedSts = 0
-ledYlwSts = 0
-ledGrnSts = 0
 
 red = LedIndicator(18)
 	
@@ -36,29 +23,41 @@ def index():
 	templateData = {
       'progress'  : 25,
       'nowProgram'  : "none",
-      'workStatus'  : "in work",
-      'steps'  : "64000",
+      'workStatus'  : work_status,
+      'steps'  : steps,
       }
 	return render_template('index.html', **templateData)
 	
 # The function below is executed when someone requests a URL with the actuator name and action in it:
+
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
+	s = ""
 	if deviceName == 'turn_left':
-		print("turned left for " + action + " steps")
+		s = "left"
 		red.blink(0.5, 0.3, 2)
 	if deviceName == 'turn_right':
-		print("turned right for " + action + " steps")
+		s = 'right'
 		red.blink(0.5, 0.3, 1)
-	if deviceName == 'ledGrn':
-		actuator = ledGrn
 
-   
+	for i in range(1, int(action)+1):
+		work_status = "in_work"
+		templateData = {
+			'progress': round(i/int(action)),
+			'nowProgram': s,
+			'workStatus': work_status,
+			'steps': steps,
+		}
+		print(s, i)
+		red.blink(0.5, 0.3, 1)
+		render_template('index.html', **templateData)
+
+	work_status = "not in work"
 	templateData = {
-	  'progress'  : 25,
-      'nowProgram'  : deviceName,
-      'workStatus'  : "in work",
-      'steps'  : "64000",
+	  'progress'  : 100,
+      'nowProgram'  : "none",
+      'workStatus'  : work_status,
+      'steps'  : steps,
 	}
 	return render_template('index.html', **templateData)
 
