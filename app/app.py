@@ -21,7 +21,6 @@ red = LedIndicator(18)
 @app.route("/")
 def index():
 	templateData = {
-		'ip': "192.168.31.25",
 		'progress': 25,
 		'nowProgram': "none",
 		'workStatus': work_status,
