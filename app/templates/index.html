@@ -48,11 +48,11 @@
           //  document.getElementById('turn_right_button').href = getHref("turn_right");
         }
         function updateProgress(s) {
-            updateTimer = setInterval(update(s), 5000);
+            updateTimer = setInterval(update(s), 1000);
         }
         function update(s) {
             console.log(document.URL + getHref(s));
-            window.location.href = document.URL + getHref(s);
+            window.location.href = ip + getHref(s);
         }
    </script>
    </body>
